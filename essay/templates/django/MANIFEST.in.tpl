@@ -1,0 +1,1 @@
+recursive-include  ${project_name} *.css *.js *.jpg *.gif *.png *.html *.md

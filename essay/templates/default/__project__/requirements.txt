@@ -1,0 +1,4 @@
+-f http://pypi.yourserver.com
+Fabric==1.4.3
+essay>=2.0.0.0
+

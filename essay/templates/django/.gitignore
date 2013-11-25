@@ -1,0 +1,9 @@
+*~
+*.log
+*.pyc
+.idea
+.project
+.pydevproject
+atlassian-ide-plugin.xml
+*.egg-info
+.env
