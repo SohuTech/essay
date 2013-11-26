@@ -26,7 +26,7 @@ def command(cmd, in_local=False, git_path=None):
 
 def clone(project_name, in_local=False, git_path=None):
     """
-        把项目lone到本地
+        把项目clone到本地
     """
 
     if env.GIT_SERVER.startswith('http'):
