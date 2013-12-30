@@ -2,7 +2,8 @@
 
 from fabric.api import parallel, task
 from fabric.state import env
-from essay.tasks import virtualenv, supervisor, package
+
+from essay.tasks import virtualenv, supervisor, package, build
 
 __all__ = ['deploy']
 
@@ -15,6 +16,9 @@ def deploy(version, venv_dir, profile):
 
     会自动安装项目运行所需要的包
     """
+
+    if not version:
+        version = build.get_latest_version()
 
     virtualenv.ensure(venv_dir)
 
