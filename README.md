@@ -56,12 +56,12 @@ essay是基于Fabric开发，在使用上依赖于pypi Server和github/Gitlab。
         虚拟环境目录名：依赖于fabfile中设置的 env.VIRTUALENV_PREFIX='~/essay_demo_webpy' ，这里参数为a，表示将在服务器家目录下得essay_demo_webpy目录下创建一个目录为 a 的virtualenv环境。
         profile：用来控制程序处于什么状态，比如可以传递debug进去，需要程序自己处理。参数会被传递到supervisord.conf中。
 
-deploy的内部的过程是：登录-R指定的服务器，在配置的VIRTUALENV_PREFIX目录下创建a虚拟环境，之后在此环境中通过pip安装已打包好的项目，最后通过supervisord来启动程序进程。
+    deploy的内部的过程是：登录-R指定的服务器，在配置的VIRTUALENV_PREFIX目录下创建a虚拟环境，之后在此环境中通过pip安装已打包好的项目，最后通过supervisord来启动程序进程。
 
 6. **快速部署** 针对需要直接部署某个分支或者commit的需求，该功能是基于上面的两个功能： ``build`` 和 ``deploy``。
 
     *使用方法:*
-    fab -R <role> deploy.quickdeploy:<venv_dir>,<profile>,<branch>
+    fab -R <role> deploy.quickdeploy:venv_dir,profile,branch
 
     参数解释::
         venv_dir: 虚拟环境名称
