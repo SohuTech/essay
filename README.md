@@ -58,6 +58,16 @@ essay是基于Fabric开发，在使用上依赖于pypi Server和github/Gitlab。
 
 deploy的内部的过程是：登录-R指定的服务器，在配置的VIRTUALENV_PREFIX目录下创建a虚拟环境，之后在此环境中通过pip安装已打包好的项目，最后通过supervisord来启动程序进程。
 
+6. **快速部署** 针对需要直接部署某个分支或者commit的需求，该功能是基于上面的两个功能： ``build`` 和 ``deploy``。
+
+    *使用方法:*
+    fab -R <role> deploy.quickdeploy:<venv_dir>,<profile>,<branch>
+
+    参数解释::
+        venv_dir: 虚拟环境名称
+        profile： 运行环境配置，同上面
+        branch： 要部署的分支
+
 *可以参考Demo：https://github.com/SohuTech/essay_demo_webpy 中的一些配置*
 
 
