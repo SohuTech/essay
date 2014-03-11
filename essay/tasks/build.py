@@ -52,6 +52,9 @@ def build(name=None, version=None, commit=None, branch=None):
 
     with(cd(project_path)):
         git.checkout(check_out)
+        # 在setup打包之前做进一步数据准备工作的hook
+        if hasattr(env, 'PRE_BUILD_HOOK'):
+            env.PRE_BUILD_HOOK()
 
         params = {
             'release_time': datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
