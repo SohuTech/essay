@@ -32,7 +32,7 @@ def ensure(**context):
         except KeyError:
             raise Exception(u'你的端口配置VENV_DIR_PORT_MAP中key[%s]不存在!' % venv_dir[-1:])
     if 'PROCESS_COUNT' in env:
-        context.setdefault('process_count', env.PROCESS_COUNT)
+        context['process_count'] = env.PROCESS_COUNT
     config.check('SUPERVISOR_CONF_TEMPLATE')
     config_template = env.SUPERVISOR_CONF_TEMPLATE
     destination = path.join(venv_dir, 'etc', 'supervisord.conf')
