@@ -1,4 +1,6 @@
 # coding: utf-8
+from __future__ import unicode_literals
+
 from fabric.api import task
 from fabric.state import env
 from fabric.network import parse_host_string

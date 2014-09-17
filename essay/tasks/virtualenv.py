@@ -1,8 +1,8 @@
 # coding:utf-8
-
-import posixpath
+from __future__ import unicode_literals
 from os import path
 from contextlib import contextmanager
+import posixpath
 
 from fabric.state import env
 from fabric.api import run, prompt
@@ -70,7 +70,7 @@ def activate(venv_dir, local=False):
             venv_dir = path.join(user_home, 'w', venv_dir)
 
     if not is_virtualenv(venv_dir):
-        raise Exception(u'无效虚拟环境: %s' % venv_dir)
+        raise Exception('无效虚拟环境: %s' % venv_dir)
 
     join = path.join if local else posixpath.join
     with prefix('. "%s"' % join(venv_dir, 'bin', 'activate')):
