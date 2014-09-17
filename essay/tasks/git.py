@@ -1,5 +1,7 @@
 # coding: utf-8
+from __future__ import unicode_literals
 import logging
+
 from fabric.state import env
 from fabric.context_managers import lcd, cd
 from fabric.operations import local, run

@@ -1,5 +1,5 @@
 # coding: utf-8
-
+from __future__ import unicode_literals
 import shutil
 import tempfile
 from essay.tasks.fs import ensure_dir, remove_dir

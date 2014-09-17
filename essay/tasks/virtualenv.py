@@ -1,8 +1,8 @@
 # coding:utf-8
-
-import posixpath
+from __future__ import unicode_literals
 from os import path
 from contextlib import contextmanager
+import posixpath
 
 from fabric.state import env
 from fabric.api import run, prompt

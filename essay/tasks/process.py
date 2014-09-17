@@ -1,4 +1,6 @@
 # coding:utf-8
+from __future__ import unicode_literals
+
 from fabric.api import run
 from fabric.context_managers import settings, hide
 from fabric.decorators import task
