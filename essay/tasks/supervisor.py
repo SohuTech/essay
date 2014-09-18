@@ -1,5 +1,5 @@
 # coding:utf-8
-
+from __future__ import unicode_literals
 from os import path
 
 from fabric.api import run, settings
@@ -15,7 +15,7 @@ __all__ = ['start_process', 'stop_process', 'restart_process', 'reload']
 
 def ensure(**context):
     if not 'CURRENT_VIRTUAL_ENV_DIR' in env:
-        raise Exception(u'只可以在虚拟环境安装Python包')
+        raise Exception('只可以在虚拟环境安装Python包')
     venv_dir = env.CURRENT_VIRTUAL_ENV_DIR
 
     package.ensure('supervisor')
@@ -30,7 +30,7 @@ def ensure(**context):
         try:
             context.setdefault('port', env.VENV_PORT_PREFIX_MAP[venv_dir[-1:]])
         except KeyError:
-            raise Exception(u'你的端口配置VENV_DIR_PORT_MAP中key[%s]不存在!' % venv_dir[-1:])
+            raise Exception('你的端口配置VENV_DIR_PORT_MAP中key[%s]不存在!' % venv_dir[-1:])
     if 'PROCESS_COUNT' in env:
         context['process_count'] = env.PROCESS_COUNT
     config.check('SUPERVISOR_CONF_TEMPLATE')
@@ -48,7 +48,7 @@ def _supervisor_command(command, venv_dir=None):
             _supervisor_command(command)
 
     if not 'CURRENT_VIRTUAL_ENV_DIR' in env:
-        raise Exception(u'只可以在虚拟环境安装Python包')
+        raise Exception('只可以在虚拟环境安装Python包')
 
     venv_dir = env.CURRENT_VIRTUAL_ENV_DIR
 
@@ -66,7 +66,7 @@ def start(venv_dir=None):
             start()
 
     if not 'CURRENT_VIRTUAL_ENV_DIR' in env:
-        raise Exception(u'只可以在虚拟环境安装Python包')
+        raise Exception('只可以在虚拟环境安装Python包')
 
     venv_dir = env.CURRENT_VIRTUAL_ENV_DIR
 

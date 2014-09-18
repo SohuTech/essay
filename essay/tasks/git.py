@@ -1,5 +1,7 @@
 # coding: utf-8
+from __future__ import unicode_literals
 import logging
+
 from fabric.state import env
 from fabric.context_managers import lcd, cd
 from fabric.operations import local, run
@@ -66,7 +68,7 @@ def pull(in_local=False, git_path=None):
 
 def add(files=None, add_all=False, in_local=False, git_path=None):
     if not files and not add_all:
-        raise Exception(u'无效参数')
+        raise Exception('无效参数')
 
     if add_all:
         cmd = 'git add .'
@@ -81,7 +83,7 @@ def commit(msg, in_local=False, git_path=None):
     """
         把项目lone到本地
     """
-    cmd = u'git commit -a -m "%s"' % msg
+    cmd = 'git commit -a -m "%s"' % msg
     command(cmd, in_local, git_path)
 
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # encoding: utf-8
-
+from __future__ import unicode_literals
 import random
 import string
 
@@ -29,7 +29,7 @@ def random_str(length=10, level=1):
     """
 
     if length < 1 or 4 < level < 1:
-        raise ValueError(u'无效参数')
+        raise ValueError('无效参数')
 
     level = int(level) + 1
     keys = ''.join(KEYS[:level])

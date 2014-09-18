@@ -1,7 +1,8 @@
 # coding: utf-8
-
+from __future__ import unicode_literals
 import os
 from os import path
+
 from fabric.contrib import files
 from fabric.decorators import task
 from fabric.operations import run, local

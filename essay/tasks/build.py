@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # encoding: utf-8
-
+from __future__ import unicode_literals
 import os
 import re
 import datetime
@@ -94,13 +94,13 @@ def get_latest_version(package_name=None):
     try:
         url = finder.find_requirement(req, upgrade=True)
     except DistributionNotFound:
-        print u'尚无任何版本！'
+        print '尚无任何版本！'
         return None
     filename = url.splitext()[0]
     version = re.search(r'(\d+\.?)+', filename)
     version = version.group() if version else None
 
-    print u'当前版本: %s' % version
+    print '当前版本: %s' % version
     return version
 
 @task
@@ -127,6 +127,6 @@ def get_next_version(package_name=None):
             index = int(last_index) + 1
 
     version = prefix + '.' + str(index)
-    print u'下一个版本: ' + version
+    print '下一个版本: ' + version
 
     return version

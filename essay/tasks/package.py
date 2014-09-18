@@ -1,5 +1,5 @@
 # coding: utf-8
-
+from __future__ import unicode_literals
 import shutil
 import tempfile
 from essay.tasks.fs import ensure_dir, remove_dir
@@ -46,7 +46,7 @@ def is_installed(package):
     """
 
     if not 'CURRENT_VIRTUAL_ENV_DIR' in env:
-        raise Exception(u'只可以在虚拟环境安装Python包')
+        raise Exception('只可以在虚拟环境安装Python包')
     venv_dir = env.CURRENT_VIRTUAL_ENV_DIR
 
     with settings(warn_only=True):
@@ -70,7 +70,7 @@ def install(package_name, version=None, private=True, user_mode=True):
     """
 
     if not 'CURRENT_VIRTUAL_ENV_DIR' in env:
-        raise Exception(u'只可以在虚拟环境安装Python包')
+        raise Exception('只可以在虚拟环境安装Python包')
 
     venv_dir = env.CURRENT_VIRTUAL_ENV_DIR
 
@@ -108,7 +108,7 @@ def uninstall(package):
     """
 
     if not 'CURRENT_VIRTUAL_ENV_DIR' in env:
-        raise Exception(u'只可以在虚拟环境安装Python包')
+        raise Exception('只可以在虚拟环境安装Python包')
 
     venv_dir = env.CURRENT_VIRTUAL_ENV_DIR
     run("%(venv_dir)s/bin/pip uninstall -y %(package)s" % locals())

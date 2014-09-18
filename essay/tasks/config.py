@@ -1,4 +1,5 @@
 # coding: utf-8
+from __future__ import unicode_literals
 from os import path
 
 from fabric.api import task
@@ -9,7 +10,7 @@ from fabric.contrib import files
 def check(*properties):
     def _check(_property):
         if not hasattr(env, _property):
-            msg = u'env没有%s属性' % _property
+            msg = 'env没有%s属性' % _property
             print msg
             raise Exception(msg)
 
