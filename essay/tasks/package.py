@@ -1,11 +1,8 @@
 # coding: utf-8
 from __future__ import unicode_literals
-import shutil
-import tempfile
-from essay.tasks.fs import ensure_dir, remove_dir
 
-from fabric.api import cd, run, env
-from fabric.context_managers import hide, settings
+from fabric.api import run, env
+from fabric.context_managers import settings
 from fabric.contrib.files import exists
 from fabric.decorators import task
 
@@ -45,7 +42,7 @@ def is_installed(package):
     注意：只能在虚拟Python环境中执行
     """
 
-    if not 'CURRENT_VIRTUAL_ENV_DIR' in env:
+    if 'CURRENT_VIRTUAL_ENV_DIR' not in env:
         raise Exception('只可以在虚拟环境安装Python包')
     venv_dir = env.CURRENT_VIRTUAL_ENV_DIR
 
@@ -69,7 +66,7 @@ def install(package_name, version=None, private=True, user_mode=True):
     注意：只能在虚拟Python环境中执行
     """
 
-    if not 'CURRENT_VIRTUAL_ENV_DIR' in env:
+    if 'CURRENT_VIRTUAL_ENV_DIR' not in env:
         raise Exception('只可以在虚拟环境安装Python包')
 
     venv_dir = env.CURRENT_VIRTUAL_ENV_DIR
@@ -107,7 +104,7 @@ def uninstall(package):
     注意：只能在虚拟Python环境中执行
     """
 
-    if not 'CURRENT_VIRTUAL_ENV_DIR' in env:
+    if 'CURRENT_VIRTUAL_ENV_DIR' not in env:
         raise Exception('只可以在虚拟环境安装Python包')
 
     venv_dir = env.CURRENT_VIRTUAL_ENV_DIR

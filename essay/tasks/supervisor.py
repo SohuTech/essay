@@ -8,13 +8,13 @@ from fabric.contrib import files
 from fabric.decorators import task
 from fabric.state import env
 
-from essay.tasks import config, util, virtualenv, package, fs
+from essay.tasks import config, util, virtualenv, package
 
 __all__ = ['start_process', 'stop_process', 'restart_process', 'reload']
 
 
 def ensure(**context):
-    if not 'CURRENT_VIRTUAL_ENV_DIR' in env:
+    if 'CURRENT_VIRTUAL_ENV_DIR' not in env:
         raise Exception('只可以在虚拟环境安装Python包')
     venv_dir = env.CURRENT_VIRTUAL_ENV_DIR
 
@@ -47,7 +47,7 @@ def _supervisor_command(command, venv_dir=None):
         with virtualenv.activate(venv_dir):
             _supervisor_command(command)
 
-    if not 'CURRENT_VIRTUAL_ENV_DIR' in env:
+    if 'CURRENT_VIRTUAL_ENV_DIR' not in env:
         raise Exception('只可以在虚拟环境安装Python包')
 
     venv_dir = env.CURRENT_VIRTUAL_ENV_DIR
@@ -65,7 +65,7 @@ def start(venv_dir=None):
         with virtualenv.activate(venv_dir):
             start()
 
-    if not 'CURRENT_VIRTUAL_ENV_DIR' in env:
+    if 'CURRENT_VIRTUAL_ENV_DIR' not in env:
         raise Exception('只可以在虚拟环境安装Python包')
 
     venv_dir = env.CURRENT_VIRTUAL_ENV_DIR

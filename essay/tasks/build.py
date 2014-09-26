@@ -6,7 +6,7 @@ import re
 import datetime
 
 from fabric.state import env
-from fabric.api import cd, run, task, settings, roles
+from fabric.api import cd, run, task, roles
 
 from essay.tasks import git, config, fs
 from fabric.contrib import files
@@ -79,6 +79,7 @@ def build(name=None, version=None, commit=None, branch=None):
 
         run("python setup.py sdist upload -r internal")
 
+
 @task
 def get_latest_version(package_name=None):
     if not package_name:
@@ -103,6 +104,7 @@ def get_latest_version(package_name=None):
     print '当前版本: %s' % version
     return version
 
+
 @task
 def get_next_version(package_name=None):
     """计算下一个版本号"""
@@ -115,7 +117,7 @@ def get_next_version(package_name=None):
     prefix = '%s.%s.%s' % (str(now.year)[-1], now.month, now.day)
 
     latest_version = get_latest_version(package_name)
-    #如果该项目没有建立过版本,从1开始
+    # 如果该项目没有建立过版本,从1开始
     if not latest_version:
         index = 1
     else:

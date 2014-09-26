@@ -10,9 +10,9 @@ setup(
     version='$${version}',
     description=readme.partition('\n')[0],
     long_description=readme,
-    author='wap-tech',
-    author_email='mpcyd@sohu-inc.com',
-    url='http://read.sohu.com',
+    author='sohutech',
+    author_email='youremail@example.com',
+    url='http://www.sohu.com',
     packages=find_packages(exclude=['*.pyc']),
     include_package_data=True,
     package_data={

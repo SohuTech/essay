@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from fabric.api import run, env, task
 from fabric.context_managers import settings
 
-from essay.tasks import config, fs
+from essay.tasks import config
 
 __all__ = ['sync']
 

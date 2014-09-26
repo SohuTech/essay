@@ -2,10 +2,10 @@
 # encoding: utf-8
 from __future__ import unicode_literals
 
-from fabric.api import run, env, sudo, settings
+from fabric.api import run, env, sudo
 from fabric.contrib import files
 from fabric.decorators import task
-from essay.tasks import config, fs
+from essay.tasks import config
 
 
 def _nginx_command(command, nginx_bin=None, nginx_conf=None, use_sudo=False):
@@ -26,6 +26,7 @@ def _nginx_command(command, nginx_bin=None, nginx_conf=None, use_sudo=False):
         sudo(cmd)
     else:
         run(cmd)
+
 
 @task
 def stop(nginx_bin=None, nginx_conf=None, use_sudo=False):
@@ -83,6 +84,6 @@ def switch(src_pattern, dst_pattern, root=None, nginx_bin=None, nginx_conf=None)
         config.check('NGINX_CONF')
         nginx_conf = env.NGINX_CONF
 
-    use_sudo = (root=='root')
+    use_sudo = (root == 'root')
     files.sed(nginx_conf, src_pattern, dst_pattern, use_sudo=use_sudo)
     reload(nginx_bin, nginx_conf, use_sudo=use_sudo)
