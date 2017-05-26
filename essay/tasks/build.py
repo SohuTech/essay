@@ -1,18 +1,23 @@
 #!/usr/bin/env python
 # encoding: utf-8
 from __future__ import unicode_literals
+
+import datetime
 import os
 import re
-import datetime
+import urllib2
 
 from fabric.state import env
 from fabric.api import cd, run, task, roles
 
 from essay.tasks import git, config, fs
 from fabric.contrib import files
-from pip.exceptions import DistributionNotFound
 
 __all__ = ['build', 'get_latest_version', 'get_next_version']
+
+
+PYPI_VERSION_RE = re.compile(r'(\d+(\.\d+)+)')
+A_MARKUP_RE = re.compile(r'<a href="(.*?)"')
 
 
 @roles('build')  # 默认使用build role
@@ -80,29 +85,26 @@ def build(name=None, version=None, commit=None, branch=None):
         run("python setup.py sdist upload -r internal")
 
 
+def get_pypi_version(package, repo_url):
+    content = urllib2.urlopen(repo_url).read()
+    links = A_MARKUP_RE.findall(content)
+    versions = [PYPI_VERSION_RE.search(link).group()
+                for link in links if package in link]
+    return max(versions, key=lambda v: map(int, v.split('.'))) \
+        if versions else None
+
+
 @task
 def get_latest_version(package_name=None):
     if not package_name:
         config.check('PROJECT')
         package_name = env.PROJECT
-
-    # 这里直接使用了package finder，而非search command,
-    # 是因为pypiserver不支持pip search
-    from pip.index import PackageFinder
-    from pip.req import InstallRequirement
-    finder = PackageFinder(find_links=[], index_urls=[env.PYPI_INDEX])
-    req = InstallRequirement(req=package_name, comes_from=None)
-    try:
-        url = finder.find_requirement(req, upgrade=True)
-    except DistributionNotFound:
-        print '尚无任何版本！'
-        return None
-    filename = url.splitext()[0]
-    version = re.search(r'(\d+\.?)+', filename)
-    version = version.group() if version else None
-
-    print '当前版本: %s' % version
-    return version
+    pypi_version = get_pypi_version(
+        package_name,
+        env.PYPI_INDEX + '/' + env.PROJECT.replace('_', '-'),
+    )
+    print '当前版本:', pypi_version or '尚无版本'
+    return pypi_version
 
 
 @task
