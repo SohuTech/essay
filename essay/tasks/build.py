@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # encoding: utf-8
-from __future__ import unicode_literals
+from __future__ import unicode_literals, print_function
 
 import datetime
 import os
 import re
-import urllib2
+import requests
 
 from fabric.state import env
 from fabric.api import cd, run, task, roles
@@ -86,7 +86,7 @@ def build(name=None, version=None, commit=None, branch=None):
 
 
 def get_pypi_version(package, repo_url):
-    content = urllib2.urlopen(repo_url).read()
+    content = requests.get(repo_url).content
     links = A_MARKUP_RE.findall(content)
     versions = [PYPI_VERSION_RE.search(link).group()
                 for link in links if package in link]
@@ -103,7 +103,7 @@ def get_latest_version(package_name=None):
         package_name,
         env.PYPI_INDEX + '/' + env.PROJECT.replace('_', '-'),
     )
-    print '当前版本:', pypi_version or '尚无版本'
+    print('current version:{}'.format(pypi_version) or 'no version found')
     return pypi_version
 
 
@@ -131,6 +131,6 @@ def get_next_version(package_name=None):
             index = int(last_index) + 1
 
     version = prefix + '.' + str(index)
-    print '下一个版本: ' + version
+    print('next version is: {}'.format(version))
 
     return version
