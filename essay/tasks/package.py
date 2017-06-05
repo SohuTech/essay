@@ -1,12 +1,20 @@
 # coding: utf-8
 from __future__ import unicode_literals
 
+import pip
+try:
+    from urlparse import urlparse
+except ImportError:
+    from urllib.parse import urlparse
+
 from fabric.api import run, env
 from fabric.context_managers import settings
 from fabric.contrib.files import exists
 from fabric.decorators import task
 
 __all__ = ['install']
+
+PIP_VERSION = int(pip.__version__[0])
 
 
 def is_virtualenv_installed_in_system():
@@ -74,10 +82,14 @@ def install(package_name, version=None, private=True, user_mode=True):
     options = []
 
     if hasattr(env, 'HTTP_PROXY'):
-        options.append('--proxy=' + env.HTTP_PROXY)
+        options.append('--proxy {}'.format(env.HTTP_PROXY))
 
     if private:
-        options.append('-i ' + env.PYPI_INDEX)
+        options.append('-i {}'.format(env.PYPI_INDEX))
+
+    if PIP_VERSION >= 7:
+        host = urlparse(env.PYPI_INDEX).netloc.split(':')[0]
+        options.append('--trusted-host {}'.format(host))
 
     options_str = ' '.join(options)
     if version:
