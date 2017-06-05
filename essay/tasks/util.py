@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
-from __future__ import unicode_literals
+from __future__ import unicode_literals, print_function
+
 import random
 import string
 
@@ -36,6 +37,6 @@ def random_str(length=10, level=1):
 
     result = ''.join([random.choice(keys) for i in range(length)])
 
-    print result
+    print(result)
 
     return result

@@ -1,5 +1,6 @@
 # coding: utf-8
-from __future__ import unicode_literals
+from __future__ import unicode_literals, print_function
+
 import logging
 
 from fabric.state import env
@@ -11,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 def command(cmd, in_local=False, git_path=None):
     cmd = cmd.encode('utf-8')
-    print cmd, '###'
+    print(cmd, '###')
 
     if in_local:
         if git_path:

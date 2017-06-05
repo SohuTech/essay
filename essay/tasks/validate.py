@@ -1,5 +1,5 @@
 # coding: utf-8
-from __future__ import unicode_literals
+from __future__ import unicode_literals, print_function
 
 from fabric.api import task
 from fabric.state import env
@@ -27,9 +27,9 @@ class Validator(object):
             for port in ports:
                 result = self.validate(host, port)
                 if not result:
-                    print "验证失败: 主机[{}] 端口[{}]".format(host, port)
+                    print("验证失败: 主机[{}] 端口[{}]".format(host, port))
         if result:
-            print u"验证成功"
+            print("验证成功")
 
     def validate(self, host, port):
         """
@@ -72,6 +72,6 @@ def validate(venv, role='product', *args, **kwargs):
     try:
         validator_instance = validator_class(venv, role, *args, **kwargs)
     except:
-        raise Exception(u"%s不是一个有效的Validator" % (validator_path,))
+        raise Exception("{}不是一个有效的Validator".format(validator_path))
 
     validator_instance.run()

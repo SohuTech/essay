@@ -1,13 +1,14 @@
 # coding:utf-8
 from __future__ import unicode_literals
-from os import path
-from contextlib import contextmanager
-import posixpath
 
-from fabric.state import env
+import posixpath
+from contextlib import contextmanager
+from os import path
+
 from fabric.api import run, prompt
 from fabric.contrib.files import exists
 from fabric.context_managers import prefix
+from fabric.state import env
 
 from essay.tasks import process, package, fs
 

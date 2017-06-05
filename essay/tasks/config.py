@@ -1,5 +1,5 @@
 # coding: utf-8
-from __future__ import unicode_literals
+from __future__ import unicode_literals, print_function
 from os import path
 
 from fabric.api import task
@@ -10,8 +10,8 @@ from fabric.contrib import files
 def check(*properties):
     def _check(_property):
         if not hasattr(env, _property):
-            msg = 'env没有%s属性' % _property
-            print msg
+            msg = 'env has not attribute [{}]'.format(_property)
+            print(msg)
             raise Exception(msg)
 
     for property in properties:
@@ -28,4 +28,4 @@ def upload_conf(**context):
 
             files.upload_template(filename, destination, context=context, use_jinja=True, template_dir=template_dir)
     else:
-        print 'no local conf to upload'
+        print('no local conf to upload')
