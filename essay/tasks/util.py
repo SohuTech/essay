@@ -7,10 +7,20 @@ import string
 
 from fabric.decorators import task
 
+try:
+    from string import lowercase
+except ImportError:
+    from string import ascii_lowercase as lowercase
+
+try:
+    from string import uppercase
+except ImportError:
+    from string import ascii_uppercase as uppercase
+
 __all__ = ['random_str']
 
-KEYS = [string.lowercase,
-        string.uppercase,
+KEYS = [lowercase,
+        uppercase,
         string.digits,
         string.punctuation]
 
