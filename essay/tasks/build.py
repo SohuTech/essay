@@ -86,11 +86,11 @@ def build(name=None, version=None, commit=None, branch=None):
 
 
 def get_pypi_version(package, repo_url):
-    content = requests.get(repo_url).content
+    content = requests.get(repo_url).text
     links = A_MARKUP_RE.findall(content)
     versions = [PYPI_VERSION_RE.search(link).group()
                 for link in links if package in link]
-    return max(versions, key=lambda v: map(int, v.split('.'))) \
+    return max(versions, key=lambda v: list(map(int, v.split('.')))) \
         if versions else None
 
 

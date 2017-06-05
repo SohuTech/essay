@@ -11,7 +11,6 @@ logger = logging.getLogger(__name__)
 
 
 def command(cmd, in_local=False, git_path=None):
-    cmd = cmd.encode('utf-8')
     print(cmd, '###')
 
     if in_local:
