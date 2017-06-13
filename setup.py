@@ -1,12 +1,14 @@
 # coding: utf-8
-#!/usr/bin/env python
+from __future__ import unicode_literals
 
 from setuptools import setup, find_packages
 
+from essay import VERSION
+
 setup(
     name='essay',
-    version='${version}',
-    description=u'持续部署工具',
+    version=VERSION,
+    description='持续部署工具',
     long_description='',
     author='SohuTech',
     author_email='thefivefire@gmail.com',
