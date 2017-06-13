@@ -26,7 +26,7 @@ setup(
         ]
     },
     classifiers=[
-        'Development Status :: Develop/unstable',
+        'Development Status :: 2 - Pre-Alpha',
         'Environment :: Console',
         'Intended Audience :: Developers',
         'Intended Audience :: System Administrators',
