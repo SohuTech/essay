@@ -18,6 +18,7 @@ setup(
     install_requires=[
         'Fabric3',
         'Jinja2',
+        'requests',
         ],
     entry_points={
         'console_scripts': [
