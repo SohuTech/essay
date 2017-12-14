@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from os import path
 
 from fabric.api import run, settings
+from fabric.color import green, red
 from fabric.context_managers import cd
 from fabric.contrib import files
 from fabric.decorators import task
@@ -59,8 +60,17 @@ def _supervisor_command(command, venv_dir=None):
 
 
 @task
-def start(venv_dir=None):
-    """重启指定虚拟环境的supervisor"""
+def start(venv_dir=None, retry=0, retry_interval=2, max_retries=3):
+    """
+    重启指定虚拟环境的supervisor
+    venv_dir 指定虚拟环境地址
+    retry 当前重试次数
+    retry_interval 多少秒后开始重试
+    max_retries 最大重试次数
+    """
+
+    if retry > max_retries:
+        print(red('start supervisord FAIL!'))
 
     if venv_dir:
         with virtualenv.activate(venv_dir):
@@ -73,7 +83,11 @@ def start(venv_dir=None):
 
     with settings(warn_only=True), cd(venv_dir):
         # 停止supervisor管理的进程
-        run('bin/supervisord -c etc/supervisord.conf ')
+        result = run('bin/supervisord -c etc/supervisord.conf ')
+        if result:
+            retry += 1
+            print(green('start supervisord fail, retry[{}]'.format(retry)))
+            start(retry=retry, retry_interval=retry_interval, max_retries=max_retries)
 
 
 @task
