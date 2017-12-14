@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from os import path
 
 from fabric.api import run, settings
-from fabric.color import green, red
+from fabric.colors import green, red
 from fabric.context_managers import cd
 from fabric.contrib import files
 from fabric.decorators import task
