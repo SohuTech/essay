@@ -71,6 +71,7 @@ def start(venv_dir=None, retry=0, retry_interval=2, max_retries=3):
 
     if retry > max_retries:
         print(red('start supervisord FAIL!'))
+        return
 
     if venv_dir:
         with virtualenv.activate(venv_dir):
