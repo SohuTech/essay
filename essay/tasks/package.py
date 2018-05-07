@@ -14,7 +14,7 @@ from fabric.decorators import task
 
 __all__ = ['install']
 
-PIP_VERSION = int(pip.__version__[0])
+PIP_VERSION = int(pip.__version__.split('.')[0])
 
 
 def is_virtualenv_installed_in_system():
