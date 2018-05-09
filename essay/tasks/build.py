@@ -82,7 +82,7 @@ def build(name=None, version=None, commit=None, branch=None):
             if files.exists(settings_dir_path):
                 fs.inplace_render(settings_dir_path, params)
 
-        run("python setup.py sdist upload -r internal")
+        run("python setup.py sdist bdist_wheel upload -r internal")
 
 
 def get_pypi_version(package, repo_url):
