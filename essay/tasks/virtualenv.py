@@ -33,12 +33,17 @@ def ensure(venv_dir, sub_dirs=None, user_mode=True):
     if is_virtualenv(venv_dir):
         return
 
-    if package.is_virtualenv_installed_in_system():
-        virtualenv_bin = 'virtualenv'
+    if env.VIRTUALENV_BIN:
+        virtualenv_bin = env.VIRTUALENV_BIN
+        command = '%(virtualenv_bin)s "%(venv_dir)s"' % locals()
     else:
-        virtualenv_bin = '~/.local/bin/virtualenv'
+        if package.is_virtualenv_installed_in_system():
+            virtualenv_bin = 'virtualenv'
+        else:
+            virtualenv_bin = '~/.local/bin/virtualenv'
 
-    command = '%(virtualenv_bin)s --quiet "%(venv_dir)s"' % locals()
+        command = '%(virtualenv_bin)s --quiet "%(venv_dir)s"' % locals()
+
     run(command)
 
     if not sub_dirs:
