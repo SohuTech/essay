@@ -13,7 +13,7 @@ setup(
     author='SohuTech',
     author_email='thefivefire@gmail.com',
     url='http://github.com/SohuTech/essay',
-    packages=find_packages(exclude=['*.pyc']),
+    packages=find_packages(exclude=['*.pyc', 'fabfile']),
     include_package_data=True,
     install_requires=[
         'Fabric3',
