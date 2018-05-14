@@ -1,11 +1,13 @@
 # coding: utf-8
+from __future__ import unicode_literals
+
 from os import path
 import logging.config
 
 def init_log(log_dir=None):
 #    if log_dir and not path.exists(log_dir):
 #        msg =  u'指定路径不存在:%s' % log_dir
-#        print msg.encode('utf-8')
+#        print(msg.encode('utf-8'))
 #        return
 
     config = {

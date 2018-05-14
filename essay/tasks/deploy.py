@@ -12,10 +12,11 @@ __all__ = ['deploy', 'quickdeploy']
 @task(default=True)
 @parallel(30)
 def deploy(version, venv_dir, profile):
-    """
-    发布指定的版本
+    """ 发布指定的版本，会自动安装项目运行所需要的包
 
-    会自动安装项目运行所需要的包
+        version：build之后的版本
+        venv_dir：虚拟环境名称
+        profile：profile参数会传递到supervisord.conf中
     """
 
     if not version:
@@ -23,11 +24,18 @@ def deploy(version, venv_dir, profile):
 
     virtualenv.ensure(venv_dir)
 
+    pre_hook = env.DEPLOY_PRE_HOOK
+    post_hook = env.DEPLOY_POST_HOOK
+
     with virtualenv.activate(venv_dir):
+        if callable(pre_hook):
+            pre_hook(version, venv_dir, profile)
         supervisor.ensure(project=env.PROJECT, profile=profile)
         package.install(env.PROJECT, version)
         supervisor.shutdown()
         supervisor.start()
+        if callable(post_hook):
+            post_hook(version, venv_dir, profile)
 
 
 @task(default=True)
