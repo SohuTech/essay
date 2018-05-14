@@ -1,4 +1,5 @@
 # coding:utf-8
+from __future__ import unicode_literals
 
 import re
 import sys
@@ -36,17 +37,17 @@ def main():
         if re.match('^[a-zA-Z0-9_]+$', project_name):
             create_project(project_name, options.template)
         else:
-            print u'无效工程名: ' + project_name
+            sys.stdout.write('无效工程名: ' + project_name)
     elif len(sys.argv) >= 2 and sys.argv[1] == 'init':
         options, args = init_options()
         project_name = sys.argv[2]
         if re.match('^[a-zA-Z0-9_]+$', project_name):
             init_project(project_name, options.template)
         else:
-            print u'无效工程名: ' + project_name
+            sys.stdout.write('无效工程名: ' + project_name)
     elif len(sys.argv) >= 2 and sys.argv[1] == 'pinstall':
         if len(sys.argv) == 2 or sys.argv[2] == '-h':
-            print "es pinstall <package>"
+            sys.stdout.write("es pinstall <package>")
             return
 
         args = sys.argv[1:]
@@ -55,7 +56,7 @@ def main():
         pip.main(args)
     else:
         if len(sys.argv) == 2 and '-h' in sys.argv:
-            print help_text
+            sys.stdout.write(help_text)
         pip.main()
 
 

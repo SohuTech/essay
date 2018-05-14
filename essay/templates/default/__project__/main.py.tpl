@@ -12,9 +12,9 @@ class index:
         return "Hello, world!"
 
 def main():
-    print 'version:', settings.__version__
-    print 'git version:', settings.__git_version__
-    print 'release time', settings.__release_time__
+    print('version:', settings.__version__)
+    print('git version:', settings.__git_version__)
+    print('release time', settings.__release_time__)
 
     app = web.application(urls, globals())
     app.run()  
