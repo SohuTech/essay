@@ -24,8 +24,8 @@ def deploy(version, venv_dir, profile):
 
     virtualenv.ensure(venv_dir)
 
-    pre_hook = env.DEPLOY_PRE_HOOK
-    post_hook = env.DEPLOY_POST_HOOK
+    pre_hook = getattr(env, 'DEPLOY_PRE_HOOK', None)
+    post_hook = getattr(env, 'DEPLOY_POST_HOOK', None)
 
     with virtualenv.activate(venv_dir):
         if callable(pre_hook):
