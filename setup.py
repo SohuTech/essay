@@ -5,11 +5,15 @@ from setuptools import setup, find_packages
 
 from essay import VERSION
 
+with open('./README.md') as f:
+    long_description = f.read()
+
+
 setup(
     name='essay',
     version=VERSION,
     description='持续部署工具',
-    long_description='',
+    long_description=long_description,
     author='SohuTech',
     author_email='thefivefire@gmail.com',
     url='http://github.com/SohuTech/essay',
