@@ -8,12 +8,11 @@ python:
 
 install:
     - travis_retry pip install flake8
-    - travis_retry pip install fabric3
     - travis_retry pip install virtualenv
-    - virtualenv ./venv
-    - ./venv/bin/python -VV
-    - ./venv/bin/python setup.py install
-    - curl-config --version; pip freeze
+    - virtualenv ./.venv
+    - ./.venv/bin/python -VV
+    - ./.venv/bin/python setup.py install
+    - ./.venv/bin/pip freeze
 
 script:
     - flake8

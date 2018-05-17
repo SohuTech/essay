@@ -1,4 +1,4 @@
 [flake8]
-exclude = .git,.tox,__pycache__,.eggs,build,sphinx
+exclude = .git,.tox,__pycache__,.eggs,build,sphinx,.venv
 max-line-length = 110
 ignore =
