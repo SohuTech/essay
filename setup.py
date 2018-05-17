@@ -19,7 +19,7 @@ setup(
         'Fabric3',
         'Jinja2',
         'requests',
-        ],
+    ],
     entry_points={
         'console_scripts': [
             'es = essay.main:main',

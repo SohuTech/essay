@@ -7,8 +7,8 @@ import os
 import re
 import requests
 
-from fabric.state import env
 from fabric.api import cd, run, task, roles
+from fabric.state import env
 
 from essay.tasks import git, config, fs
 from fabric.contrib import files
@@ -71,16 +71,13 @@ def build(name=None, version=None, commit=None, branch=None):
 
         if hasattr(env, 'SETTINGS_BASE_FILE'):
             settings_file_path = os.path.join(project_path, *env.SETTINGS_BASE_FILE.split('/'))
-            if files.exists(settings_file_path):
-                fs.inplace_render(settings_file_path, params)
         else:
             settings_file_path = os.path.join(project_path, env.PROJECT, 'settings.py')
-            if files.exists(settings_file_path):
-                fs.inplace_render(settings_file_path, params)
+            if not files.exists(settings_file_path):
+                settings_file_path = os.path.join(project_path, env.PROJECT, 'settings', '__init__.py')
 
-            settings_dir_path = os.path.join(project_path, env.PROJECT, 'settings', '__init__.py')
-            if files.exists(settings_dir_path):
-                fs.inplace_render(settings_dir_path, params)
+        if files.exists(settings_file_path):
+            fs.inplace_render(settings_file_path, params)
 
         run("python setup.py sdist bdist_wheel upload -r internal")
 

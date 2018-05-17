@@ -71,7 +71,7 @@ def validate(venv, role='product', *args, **kwargs):
 
     try:
         validator_instance = validator_class(venv, role, *args, **kwargs)
-    except:
+    except TypeError:
         raise Exception("{}不是一个有效的Validator".format(validator_path))
 
     validator_instance.run()
