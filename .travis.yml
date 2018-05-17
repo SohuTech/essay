@@ -1,0 +1,19 @@
+language: python
+sudo: false
+
+python:
+    - 2.7
+    - 3.5
+    - 3.6
+
+install:
+    - travis_retry pip install flake8
+    - travis_retry pip install fabric3
+    - travis_retry pip install virtualenv
+    - virtualenv ./venv
+    - ./venv/bin/python -VV
+    - ./venv/bin/python setup.py install
+    - curl-config --version; pip freeze
+
+script:
+    - flake8
