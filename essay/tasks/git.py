@@ -94,7 +94,8 @@ def checkout(commit_or_branch, in_local=False, git_path=None):
         commit据有优先权
     """
 
-    cmd = 'git reset --hard && git fetch && git checkout %s && git pull && git submodule update --init --recursive' % commit_or_branch
+    cmd = 'git reset --hard && git fetch && git checkout %s &&\
+        git pull && git submodule update --init --recursive' % commit_or_branch
     command(cmd, in_local, git_path)
 
 

@@ -4,9 +4,9 @@
 创建新工程结构
 """
 
+import logging
 import os
 import string
-import logging
 from os import path
 
 from fabric.api import lcd
@@ -38,7 +38,7 @@ def init_project(project, template='default'):
     此方法不需要连接git服务器
     """
     if project is None:
-        project_dir = path.abspath('.') 
+        project_dir = path.abspath('.')
         template = 'init'
         project = ''
         params = {

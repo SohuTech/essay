@@ -19,10 +19,12 @@ except ImportError:
 
 __all__ = ['random_str']
 
-KEYS = [lowercase,
-        uppercase,
-        string.digits,
-        string.punctuation]
+KEYS = [
+    lowercase,
+    uppercase,
+    string.digits,
+    string.punctuation,
+]
 
 
 @task
@@ -33,11 +35,11 @@ def random_str(length=10, level=1):
     参数:
         length: 字符串长度
         level: 使用的字符集
-            1 -> abcdefghijklmnopqrstuvwxyz
-            2 -> abcdefghijklmnopqrstuvwxyz + ABCDEFGHIJKLMNOPQRSTUVWXYZ
-            3 -> abcdefghijklmnopqrstuvwxyz + ABCDEFGHIJKLMNOPQRSTUVWXYZ + 0123456789
-            4 -> abcdefghijklmnopqrstuvwxyz + ABCDEFGHIJKLMNOPQRSTUVWXYZ + 0123456789 + !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~
-    """
+        1 -> abcdefghijklmnopqrstuvwxyz
+        2 -> abcdefghijklmnopqrstuvwxyz + ABCDEFGHIJKLMNOPQRSTUVWXYZ
+        3 -> abcdefghijklmnopqrstuvwxyz + ABCDEFGHIJKLMNOPQRSTUVWXYZ + 0123456789
+        4 -> abcdefghijklmnopqrstuvwxyz + ABCDEFGHIJKLMNOPQRSTUVWXYZ + 0123456789 + !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~
+    """  # noqa
 
     if length < 1 or 4 < level < 1:
         raise ValueError('无效参数')

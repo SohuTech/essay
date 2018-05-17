@@ -26,6 +26,9 @@ def upload_conf(**context):
             venv_dir = env.CURRENT_VIRTUAL_ENV_DIR
             destination = path.join(venv_dir, server_conf)
 
-            files.upload_template(filename, destination, context=context, use_jinja=True, template_dir=template_dir)
+            files.upload_template(
+                filename, destination, context=context,
+                use_jinja=True, template_dir=template_dir
+            )
     else:
         print('no local conf to upload')

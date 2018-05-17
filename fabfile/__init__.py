@@ -2,11 +2,13 @@
 
 import os
 
-PROJECT_ROOT = os.path.dirname(os.path.dirname(__file__))
-
 from fabric.state import env
 
-from essay.tasks import build
+from essay.tasks import build  # noqa
+
+
+PROJECT_ROOT = os.path.dirname(os.path.dirname(__file__))
+
 
 env.roledefs = {
     'build': ['vagrant@127.0.0.1:2202'],
